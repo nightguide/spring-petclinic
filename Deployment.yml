@@ -17,7 +17,7 @@ spec:
     spec:
       containers: 
       - name: spring-petclinic
-        image: kub-ansible:5000/admin/spring-petclinic:latest
+        image: kub-ansible:5000/admin/spring-petclinic
 #        command: [ "bin/bash", "-c", "./wrapper.sh" ]
         ports:
         - containerPort: 8080
