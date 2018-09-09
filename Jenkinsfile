@@ -31,7 +31,7 @@ pipeline {
       agent any
       steps {
           input('Do you want to processed?')
-          sh 'kubectl apply -f Deployment.yml'
+          sh 'kubectl replace -f Deployment.yml --force'
          }
         }
       }
