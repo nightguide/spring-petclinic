@@ -28,7 +28,7 @@ pipeline {
         }
        }
  stage('Deploy to Kubernetes') {
-      input 'Do you approve deployment?'
+      input "do you approve deployment?"
       agent any
       steps {
           sh 'kubectl apply -f Deployment.yml'
