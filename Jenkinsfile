@@ -30,7 +30,7 @@ pipeline {
  stage('Deploy to Kubernetes') {
       agent any
       steps {
-          sh 'kubectl apply -f ../Deployment.yml'
+          sh 'kubectl apply -f Deployment.yml'
          }
         }
       }
