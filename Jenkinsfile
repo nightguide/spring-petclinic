@@ -31,7 +31,8 @@ pipeline {
       agent any
       steps {
           input('Do you want to processed?')
-          sh 'kubectl replace -f Deployment.yml --force'
+           sh 'kubectl set image deployment/spring-petclinic spring-petclinic=kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER'
+#          sh 'kubectl replace -f Deployment.yml --force'
          }
         }
       }
