@@ -27,5 +27,11 @@ pipeline {
           sh 'docker push kub-ansible:5000/admin/spring-petclinic:latest'
         }
        }
+ stage('Deploy to Kubernetes') {
+      agent any
+      steps {
+          sh 'kubectl apply -f Deployment.yml'
+         }
+        }
       }
     }
