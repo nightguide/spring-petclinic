@@ -16,7 +16,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t kub-ansible:5000/admin/spring-petclinic:latest .'
+        sh 'docker build -t kub-ansible:5000/admin/spring-petclinic'
       }
     }
 
@@ -24,7 +24,7 @@ pipeline {
       agent any
       steps {
           sh "docker login -u admin -p N0v0sibirsk! kub-ansible:5000"
-          sh 'docker push kub-ansible:5000/admin/spring-petclinic:latest'
+          sh 'docker push kub-ansible:5000/admin/spring-petclinic'
         }
        }
  stage('Deploy to Kubernetes') {
