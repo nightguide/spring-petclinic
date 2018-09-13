@@ -45,11 +45,11 @@ pipeline {
  stage('Deploy to Kubernetes') {
       agent any
       steps {
-          input('Do you want to processed?')
            sh 'kubectl set image deployment/spring-petclinic spring-petclinic=kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER -n=dev'
          }
         }
-     post {
+     }
+post {
     success {
       slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }
@@ -58,6 +58,5 @@ pipeline {
       slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }     
  }
-     }
 }
 
