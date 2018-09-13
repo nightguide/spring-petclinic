@@ -12,22 +12,23 @@ pipeline {
       
       steps {
         sh 'mvn clean install'
-      }
-      
+      }  
+    }
     
-          post {
-        always {
-            junit 'target/surefire-reports/*.xml'
-        }
+      stage('Unit Tests') {
+      agent any
+      steps {
+       junit 'target/surefire-reports/*.xml'
+ 
+      }
     }
-    }
-    stage('Docker Build') {
+  
+  stage('Docker Build') {
       agent any
       steps {
         sh 'docker build -t kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER .'
       }
     }
-
  stage('Docker Push') {
       agent any
       steps {
