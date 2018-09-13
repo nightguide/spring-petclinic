@@ -1,5 +1,7 @@
 #!groovy
 
+node {
+  
 pipeline {
   agent none
   stages {
@@ -45,3 +47,4 @@ pipeline {
         }
       }
     }
+}
