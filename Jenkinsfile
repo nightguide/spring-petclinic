@@ -14,11 +14,6 @@ pipeline {
         sh 'mvn clean install'
       }
       
-      post {
-        always {
-            junit 'build/reports/**/*.xml'
-        }
-      }
     }
     stage('Docker Build') {
       agent any
