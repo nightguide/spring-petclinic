@@ -1,6 +1,6 @@
 #!groovy
 
-node {
+
   
 pipeline {
   agent none
@@ -47,4 +47,4 @@ pipeline {
         }
       }
     }
-}
+
