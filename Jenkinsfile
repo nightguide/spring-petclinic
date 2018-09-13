@@ -17,7 +17,7 @@ pipeline {
         slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         //Build
         sh 'mvn clean install'
-      }  
+      }   
     }
     
       stage('Unit Tests') {
@@ -26,6 +26,7 @@ pipeline {
        junit 'target/surefire-reports/*.xml'
  
       }
+        
     }
   
   stage('Docker Build') {
@@ -48,6 +49,14 @@ pipeline {
            sh 'kubectl set image deployment/spring-petclinic spring-petclinic=kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER -n=dev'
          }
         }
-      }
+ post {
+    success {
+      slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+    }
+
+    failure {
+      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+    } 
+     }
     }
 
