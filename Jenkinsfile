@@ -9,9 +9,15 @@ pipeline {
           image 'maven:3.5.0'
         }
       }
+      
       steps {
         sh 'mvn clean install'
-        sh 'mvn test'
+      }
+      
+      post {
+        always {
+            junit 'build/reports/**/*.xml'
+        }
       }
     }
     stage('Docker Build') {
