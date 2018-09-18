@@ -3,7 +3,7 @@
 
   
 pipeline {
-  agent { label 'jenkins-slave' }
+  agent { label 'jenkins-slave' 
   stages {
     stage('Maven Install') {
       agent {
@@ -58,5 +58,7 @@ post {
       slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }     
  }
-}
+        }
+        }
+  
 
