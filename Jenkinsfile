@@ -3,7 +3,7 @@
 
   
 pipeline {
-  agent none
+  agent { label 'jenkins-slave' }
   stages {
     stage('Maven Install') {
       agent {
