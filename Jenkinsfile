@@ -1,7 +1,5 @@
 #!groovy
 
-
-  
 pipeline {
   agent { label 'jenkins-slave' }
   stages {
@@ -9,6 +7,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.5.0'
+          reuseNode true
         }
       }
       
@@ -20,8 +19,7 @@ pipeline {
       }   
     }
     
-      stage('Unit Tests') {
-      agent any
+    stage('Unit Tests') {
       steps {
        junit 'target/surefire-reports/*.xml'
  
@@ -30,20 +28,17 @@ pipeline {
     }
   
   stage('Docker Build') {
-      agent any
       steps {
         sh 'docker build -t kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER .'
       }
     }
  stage('Docker Push') {
-      agent any
       steps {
           sh "docker login -u admin -p N0v0sibirsk! kub-ansible:5000"
           sh 'docker push kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER'
         }
        }
  stage('Deploy to Kubernetes') {
-      agent any
       steps {
            sh 'kubectl set image deployment/spring-petclinic spring-petclinic=kub-ansible:5000/admin/spring-petclinic:$BUILD_NUMBER -n=dev'
          }
